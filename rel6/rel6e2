@@ -1,0 +1,122 @@
+.data
+escolha: .asciiz "\nEscolha a figura (1-Trapezio, 2-Retangulo, 3-Triangulo): "
+f1: .asciiz "\n1- Trapezio"
+f2: .asciiz "\n2- Retangulo"
+f3: .asciiz "\n3- Triangulo"
+numeroNaoSuportado: .asciiz "\nEscolha um numero valido."
+base: .asciiz "\nBase: "
+altura: .asciiz "\nAltura: "
+baseMaior: .asciiz "\nBase Maior: "
+baseMenor: .asciiz "\nBase Menor: "
+areaTriangulo: .asciiz "\nArea do Triangulo: "
+areaRetangulo: .asciiz "\nArea do Retangulo: "
+areaTrapezio: .asciiz "\nArea do Trapezio: "
+dois: .float 2.0
+
+.text
+main:
+    li $v0, 4
+    la $a0, escolha
+    syscall
+
+    li $v0, 5
+    syscall
+    move $t0, $v0
+
+    beq $t0, 1, trapezio
+    beq $t0, 2, retangulo
+    beq $t0, 3, triangulo
+
+erro:
+    li $v0, 4
+    la $a0, numeroNaoSuportado
+    syscall
+    j main
+
+trapezio:
+    li $v0, 4
+    la $a0, baseMaior
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f1, $f0
+
+    li $v0, 4
+    la $a0, baseMenor
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f2, $f0
+
+    li $v0, 4
+    la $a0, altura
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f3, $f0
+
+    add.s $f4, $f1, $f2
+    mul.s $f4, $f4, $f3
+    l.s $f5, dois
+    div.s $f12, $f4, $f5
+
+    li $v0, 4
+    la $a0, areaTrapezio
+    syscall
+    li $v0, 2
+    syscall
+    j fim
+
+retangulo:
+    li $v0, 4
+    la $a0, base
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f1, $f0
+
+    li $v0, 4
+    la $a0, altura
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f2, $f0
+
+    mul.s $f12, $f1, $f2
+
+    li $v0, 4
+    la $a0, areaRetangulo
+    syscall
+    li $v0, 2
+    syscall
+    j fim
+
+triangulo:
+    li $v0, 4
+    la $a0, base
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f1, $f0
+
+    li $v0, 4
+    la $a0, altura
+    syscall
+    li $v0, 6
+    syscall
+    mov.s $f2, $f0
+
+    mul.s $f4, $f1, $f2
+    l.s $f5, dois
+    div.s $f12, $f4, $f5
+
+    li $v0, 4
+    la $a0, areaTriangulo
+    syscall
+    li $v0, 2
+    syscall
+    j fim
+
+fim:
+    li $v0, 10
+    syscall
