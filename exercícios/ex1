@@ -1,0 +1,19 @@
+# 1 - 2 + 10 * 3 / 2
+# 1 - 2 + 10 * (3/2)
+# $t1 + $t3
+
+li $t7, 10
+li $t6, 3
+
+mult $t7, $t6
+
+li $t7, 2
+mflo $t6
+
+div $t6, $t7
+
+li $t3, 1
+mflo $t4
+
+subi $t2, $t3, 2
+add $t0, $t2, $t4

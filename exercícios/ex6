@@ -1,0 +1,9 @@
+li $t5, 12
+
+li $t0, 2
+
+addi $t1, $t0, 4
+subi $t1, $t1, 11
+
+div $t5, $t1
+mflo $t2

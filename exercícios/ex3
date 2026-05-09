@@ -1,0 +1,8 @@
+# 0xFF & 0xF0 | 1
+
+li $t0, 0xFF
+li $t1, 0xF0
+
+and $t2, $t0, $t1
+
+ori $t3, $t1, 1 
